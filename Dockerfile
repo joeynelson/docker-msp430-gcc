@@ -13,10 +13,11 @@ RUN wget -O - "https://apt.kitware.com/keys/kitware-archive-latest.asc" 2>/dev/n
         apt-get install -y cmake
 
 # Install MSP430-GCC and support files
-ENV MSP430_GCC_VERSION 8.3.0.16
+ENV MSP430_GCC_VERSION 9.3.1.11
+ENV MSP430_GCC_SUPPORT_VERSION 1.212
 RUN mkdir -p /opt/ti
 RUN wget "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/exports/msp430-gcc-${MSP430_GCC_VERSION}_linux64.tar.bz2" && \
-        wget "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/exports/msp430-gcc-support-files-1.208.zip" && \
+        wget "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/exports/msp430-gcc-support-files-${MSP430_GCC-SUPPORT_VERSION.zip" && \
         tar xf msp430-gcc-${MSP430_GCC_VERSION}_linux64.tar.bz2 && \
         unzip msp430-gcc-support-files-1.208.zip && \
         mv msp430-gcc-${MSP430_GCC_VERSION}_linux64 /opt/ti/msp430-gcc && \
@@ -33,7 +34,7 @@ RUN apt-get update && \
         apt-get install -y libusb-0.1-4 libgconf-2-4 gdb
 
 # Install UniFlash
-ENV UNIFLASH_VERSION=5.2.0.2519
+ENV UNIFLASH_VERSION=7.0.0.3615
 RUN wget "http://software-dl.ti.com/ccs/esd/uniflash/uniflash_sl.${UNIFLASH_VERSION}.run" && \
         chmod +x uniflash_sl.${UNIFLASH_VERSION}.run && \
         ./uniflash_sl.${UNIFLASH_VERSION}.run --unattendedmodeui none --mode unattended --prefix /opt/ti/uniflash && \
